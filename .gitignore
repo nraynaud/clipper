@@ -1,0 +1,10 @@
+C#/GuiDemo/GuiDemo/bin
+C#/GuiDemo/GuiDemo/obj
+C#/clipper_library/bin
+C#/clipper_library/obj
+C#/ConsoleDemo/ConsoleDemo/obj
+C#/ConsoleDemo/ConsoleDemo/bin
+Curves/CurvesDemo/bin
+Curves/CurvesDemo/obj
+
+*.userprefs

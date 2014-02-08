@@ -292,7 +292,6 @@ namespace Clipper_Lines_Demo
     {
       float d1 = (small ? 3 : 4), d2 = (small ? 1.0f : 1.5f);
       PointF[] btnPts = new PointF[8];
-      Path p = new Path(8);
       float x = (float)(ip.X / scale);
       float y = (float)(ip.Y / scale);
       btnPts[0] = new PointF(x - d2, y - d1);
@@ -520,7 +519,6 @@ namespace Clipper_Lines_Demo
       if (LeftButtonPressed)
       { 
         if (MovingButtonIdx < 0) return;
-        MultiPath mp = GetActivePath();
         if (MovingButtonIdx >= MovingButtonSeg.Count) return;
         MovingButtonSeg.Move(MovingButtonIdx, new IntPoint(e.X * scale, e.Y * scale));
         BmpUpdateNeeded();

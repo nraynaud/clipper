@@ -43,10 +43,10 @@
 //#define use_int32
 
 //use_xyz: adds a Z member to IntPoint. Adds a minor cost to performance.
-//#define use_xyz
+#define use_xyz
 
 //use_lines: Enables line clipping. Adds a very minor cost to performance.
-//#define use_lines
+#define use_lines
 
 //use_deprecated: Enables support for the obsolete OffsetPaths() function
 //which has been replace with the ClipperOffset class.
@@ -995,7 +995,6 @@ namespace ClipperLib
       }
 
       //3. Do second stage of edge initialization ...
-      TEdge eHighest = eStart;
       E = eStart;
       do
       {
@@ -1461,9 +1460,7 @@ namespace ClipperLib
       private cInt PopScanbeam()
       {
         cInt Y = m_Scanbeam.Y;
-        Scanbeam sb2 = m_Scanbeam;
         m_Scanbeam = m_Scanbeam.Next;
-        sb2 = null;
         return Y;
       }
       //------------------------------------------------------------------------------
@@ -1486,13 +1483,10 @@ namespace ClipperLib
       private void DisposeOutPts(OutPt pp)
       {
           if (pp == null) return;
-          OutPt tmpPp = null;
           pp.Prev.Next = null;
           while (pp != null)
           {
-              tmpPp = pp;
               pp = pp.Next;
-              tmpPp = null;
           }
       }
       //------------------------------------------------------------------------------
@@ -3418,11 +3412,9 @@ namespace ClipperLib
                 (!PreserveCollinear || !Pt2IsBetweenPt1AndPt3(pp.Prev.Pt, pp.Pt, pp.Next.Pt))))
               {
                   lastOK = null;
-                  OutPt tmp = pp;
                   pp.Prev.Next = pp.Next;
                   pp.Next.Prev = pp.Prev;
                   pp = pp.Prev;
-                  tmp = null;
               }
               else if (pp == lastOK) break;
               else

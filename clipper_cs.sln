@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiDemo", "C#\GuiDemo\GuiDemo\GuiDemo.csproj", "{8BD44147-3290-4A73-BAA2-1C171566BC25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clipper_library", "C#\clipper_library\clipper_library.csproj", "{9B062971-A88E-4A3D-B3C9-12B78D15FA66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDemo", "C#\ConsoleDemo\ConsoleDemo\ConsoleDemo.csproj", "{185E6664-6A68-4377-99BE-4D4BFED19298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurvesDemo", "Curves\CurvesDemo\CurvesDemo.csproj", "{26B71993-4477-4482-8991-8288A6D5C99D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{185E6664-6A68-4377-99BE-4D4BFED19298}.Debug|x86.ActiveCfg = Debug|x86
+		{185E6664-6A68-4377-99BE-4D4BFED19298}.Debug|x86.Build.0 = Debug|x86
+		{185E6664-6A68-4377-99BE-4D4BFED19298}.Release|x86.ActiveCfg = Release|x86
+		{185E6664-6A68-4377-99BE-4D4BFED19298}.Release|x86.Build.0 = Release|x86
+		{26B71993-4477-4482-8991-8288A6D5C99D}.Debug|x86.ActiveCfg = Debug|x86
+		{26B71993-4477-4482-8991-8288A6D5C99D}.Debug|x86.Build.0 = Debug|x86
+		{26B71993-4477-4482-8991-8288A6D5C99D}.Release|x86.ActiveCfg = Release|x86
+		{26B71993-4477-4482-8991-8288A6D5C99D}.Release|x86.Build.0 = Release|x86
+		{8BD44147-3290-4A73-BAA2-1C171566BC25}.Debug|x86.ActiveCfg = Debug|x86
+		{8BD44147-3290-4A73-BAA2-1C171566BC25}.Debug|x86.Build.0 = Debug|x86
+		{8BD44147-3290-4A73-BAA2-1C171566BC25}.Release|x86.ActiveCfg = Release|x86
+		{8BD44147-3290-4A73-BAA2-1C171566BC25}.Release|x86.Build.0 = Release|x86
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Debug|x86.Build.0 = Debug|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Release|x86.ActiveCfg = Release|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = C#\GuiDemo\GuiDemo\GuiDemo.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = null
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.AfterDelegateDeclarationParameterComma = True
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 120
+		$4.TabWidth = 2
+		$4.IndentWidth = 2
+		$4.EolMarker = Windows
+		$4.inheritsSet = VisualStudio
+		$4.inheritsScope = text/plain
+		$4.scope = text/plain
+	EndGlobalSection
+EndGlobal
