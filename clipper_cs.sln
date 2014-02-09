@@ -9,12 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDemo", "C#\ConsoleDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurvesDemo", "Curves\CurvesDemo\CurvesDemo.csproj", "{26B71993-4477-4482-8991-8288A6D5C99D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testing", "C#\testing\testing.csproj", "{0FE94AD4-A025-476F-AD5B-8E4CB924BCFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FE94AD4-A025-476F-AD5B-8E4CB924BCFE}.Debug|x86.ActiveCfg = Debug|x86
+		{0FE94AD4-A025-476F-AD5B-8E4CB924BCFE}.Debug|x86.Build.0 = Debug|x86
+		{0FE94AD4-A025-476F-AD5B-8E4CB924BCFE}.Release|x86.ActiveCfg = Release|x86
+		{0FE94AD4-A025-476F-AD5B-8E4CB924BCFE}.Release|x86.Build.0 = Release|x86
 		{185E6664-6A68-4377-99BE-4D4BFED19298}.Debug|x86.ActiveCfg = Debug|x86
 		{185E6664-6A68-4377-99BE-4D4BFED19298}.Debug|x86.Build.0 = Debug|x86
 		{185E6664-6A68-4377-99BE-4D4BFED19298}.Release|x86.ActiveCfg = Release|x86
@@ -33,7 +39,7 @@ Global
 		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = C#\GuiDemo\GuiDemo\GuiDemo.csproj
+		StartupItem = C#\testing\testing.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
