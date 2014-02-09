@@ -252,7 +252,7 @@ namespace ClipperLib
       return !(val1 == val2);
     }
 
-    public override bool Equals(System.Object obj)
+    public override bool Equals(Object obj)
     {
       if (obj == null || !(obj is Int128))
         return false;
@@ -263,35 +263,6 @@ namespace ClipperLib
     public override int GetHashCode()
     {
       return hi.GetHashCode() ^ lo.GetHashCode();
-    }
-
-    public static bool operator >(Int128 val1, Int128 val2)
-    {
-      if (val1.hi != val2.hi)
-        return val1.hi > val2.hi;
-      else
-        return val1.lo > val2.lo;
-    }
-
-    public static bool operator <(Int128 val1, Int128 val2)
-    {
-      if (val1.hi != val2.hi)
-        return val1.hi < val2.hi;
-      else
-        return val1.lo < val2.lo;
-    }
-
-    public static Int128 operator +(Int128 lhs, Int128 rhs)
-    {
-      lhs.hi += rhs.hi;
-      lhs.lo += rhs.lo;
-      if (lhs.lo < rhs.lo) lhs.hi++;
-      return lhs;
-    }
-
-    public static Int128 operator -(Int128 lhs, Int128 rhs)
-    {
-      return lhs + -rhs;
     }
 
     public static Int128 operator -(Int128 val)
@@ -329,65 +300,6 @@ namespace ClipperLib
       if (lo < b) hi++;
       Int128 result = new Int128(hi, lo);
       return negate ? -result : result;
-    }
-
-    public static Int128 operator /(Int128 lhs, Int128 rhs)
-    {
-      if (rhs.lo == 0 && rhs.hi == 0)
-        throw new ClipperException("Int128: divide by zero");
-
-      bool negate = (rhs.hi < 0) != (lhs.hi < 0);
-      if (lhs.hi < 0) lhs = -lhs;
-      if (rhs.hi < 0) rhs = -rhs;
-
-      if (rhs < lhs)
-      {
-        Int128 result = new Int128(0);
-        Int128 cntr = new Int128(1);
-        while (rhs.hi >= 0 && !(rhs > lhs))
-        {
-          rhs.hi <<= 1;
-          if ((Int64)rhs.lo < 0) rhs.hi++;
-          rhs.lo <<= 1;
-
-          cntr.hi <<= 1;
-          if ((Int64)cntr.lo < 0) cntr.hi++;
-          cntr.lo <<= 1;
-        }
-        rhs.lo >>= 1;
-        if ((rhs.hi & 1) == 1)
-          rhs.lo |= 0x8000000000000000;
-        rhs.hi = (Int64)((UInt64)rhs.hi >> 1);
-
-        cntr.lo >>= 1;
-        if ((cntr.hi & 1) == 1)
-          cntr.lo |= 0x8000000000000000;
-        cntr.hi >>= 1;
-
-        while (cntr.hi != 0 || cntr.lo != 0)
-        {
-          if (!(lhs < rhs))
-          {
-            lhs -= rhs;
-            result.hi |= cntr.hi;
-            result.lo |= cntr.lo;
-          }
-          rhs.lo >>= 1;
-          if ((rhs.hi & 1) == 1)
-            rhs.lo |= 0x8000000000000000;
-          rhs.hi >>= 1;
-
-          cntr.lo >>= 1;
-          if ((cntr.hi & 1) == 1)
-            cntr.lo |= 0x8000000000000000;
-          cntr.hi >>= 1;
-        }
-        return negate ? -result : result;
-      }
-      else if (rhs == lhs)
-        return new Int128(negate ? -1 : 1);
-      else
-        return new Int128(0);
     }
 
     public double ToDouble()
