@@ -49,7 +49,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="simpleTest.json" />
+    <EmbeddedResource Include="simpleUnionTest.json" />
+    <EmbeddedResource Include="simpleIntersectionTest.json" />
+    <EmbeddedResource Include="simpleDifferenceTest.json" />
+    <EmbeddedResource Include="simpleXorTest.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

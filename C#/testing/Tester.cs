@@ -10,67 +10,20 @@ namespace Testing
 {
   public class Tester
   {
-    //http://social.msdn.microsoft.com/Forums/en-US/2ff3016c-bd61-4fec-8f8c-7b6c070123fa/c-compare-two-lists-of-objects?forum=csharplanguage
-    //(I can't believe I have to do that, I think I'm missing something in the defautl lib)
-    public class ListComparer<T> : IEqualityComparer<List<T>>
-    {
-      readonly IEqualityComparer<T> itemComparer;
-
-      public ListComparer ()
-      {
-        itemComparer = EqualityComparer<T>.Default;
-      }
-
-      public bool Equals (List<T> x, List<T> y)
-      {
-        return x.SequenceEqual (y, itemComparer);
-      }
-
-      public int GetHashCode (List<T> obj)
-      {
-        const int somePrimeNumber = 37;
-
-        int result = 1;
-        foreach (T item in obj.Take(5)) {
-          result = (somePrimeNumber * result) + itemComparer.GetHashCode (item);
-        }
-
-        return result;
-      }
-    }
     #pragma warning disable 0649
     [Serializable]
     struct TestPoint
     {
-      public TestPoint (double X, double Y)
+      public TestPoint (double x, double y)
       {
-        this.X = X;
-        this.Y = Y;
+        this.X = x;
+        this.Y = y;
       }
 
       public double X;
       public double Y;
-
-      public override bool Equals (Object obj)
-      {
-        return obj is TestPoint && this == (TestPoint)obj;
-      }
-
-      public override int GetHashCode ()
-      {
-        return X.GetHashCode () ^ Y.GetHashCode ();
-      }
-
-      public static bool operator == (TestPoint a, TestPoint b)
-      {
-        return a.X == b.X && a.Y == b.Y;
-      }
-
-      public static bool operator != (TestPoint a, TestPoint b)
-      {
-        return !(a == b);
-      }
     }
+
     [Serializable]
     class TestOperation
     {
@@ -103,44 +56,56 @@ namespace Testing
       {
         return data.ConvertAll (path => path.ConvertAll (point => new TestPoint (point.X / scale, point.Y / scale)));
       }
+
       public static List<List<IntPoint>> ToClipper (double scale, List<List<TestPoint>> data)
       {
         return data.ConvertAll (path => path.ConvertAll (point => new IntPoint (point.X * scale, point.Y * scale)));
+      }
+
+      public double RelativeAreaDiff (List<List<IntPoint>> actual, List<List<IntPoint>>expected)
+      {
+        var expectedArea = expected.Sum (path => Clipper.Area (path));
+        var difference = new List<List<IntPoint>> ();
+        var clipper = new Clipper ();
+        clipper.AddPaths (actual, PolyType.ptSubject, true);
+        clipper.AddPaths (expected, PolyType.ptClip, true);
+        clipper.Execute (ClipType.ctXor, difference, PolyFillType.pftEvenOdd, PolyFillType.pftEvenOdd);
+        var differenceArea = difference.Sum (path => Clipper.Area (path));
+        return Math.Abs (differenceArea) / Math.Abs (expectedArea);
       }
 
       public void Run ()
       {
         var s = ToClipper (scale, subject);
         var c = ToClipper (scale, clip);
-        var result = FromClipper (scale, operation.Run (s, c));
-        Console.WriteLine ("result:");
-        Console.WriteLine (new JavaScriptSerializer ().Serialize (result));
-        Console.WriteLine ("expected:");
-        Console.WriteLine (new JavaScriptSerializer ().Serialize (expected));
-        var testPassed = result.SequenceEqual (expected, new ListComparer<TestPoint> ());
-        if (testPassed)
-          Console.WriteLine ("test passed \\o/");
-        else {
-          Console.WriteLine ("test failed :(");
-          Console.WriteLine (testPassed);
-          Console.WriteLine (new JavaScriptSerializer ().Serialize (result.Except (expected)));
-        }
+        var clipperResult = operation.Run (s, c);
+        var diff = RelativeAreaDiff (clipperResult, ToClipper (scale, expected));
+        if (diff < 0.0000001)
+          Console.WriteLine ("test passed (diff: " + diff + ") \\o/ ");
+        else
+          Console.WriteLine ("test failed (diff: " + diff + ") :(");
       }
     }
     #pragma warning restore 0649
 
-    public static void Run ()
+    public static void RunTest (string fileName)
     {
       Assembly assembly = Assembly.GetExecutingAssembly ();
-      using (var polyStream = new StreamReader (assembly.GetManifestResourceStream ("Testing.simpleTest.json"))) {
+      using (var polyStream = new StreamReader (assembly.GetManifestResourceStream (fileName))) {
         string file = polyStream.ReadToEnd ();
         var serializer = new JavaScriptSerializer ();
         var test = serializer.Deserialize<ClipperTest> (file);
-        Console.Write (file);
-        Console.WriteLine ("running");
+        Console.WriteLine ("running " + fileName);
         test.Run ();
-        Console.WriteLine ("done!");
       }
+    }
+
+    public static void Run ()
+    {
+      RunTest ("Testing.simpleUnionTest.json");
+      RunTest ("Testing.simpleIntersectionTest.json");
+      RunTest ("Testing.simpleDifferenceTest.json");
+      RunTest ("Testing.simpleXorTest.json");
     }
   }
 }
