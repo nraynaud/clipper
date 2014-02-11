@@ -52,6 +52,12 @@
     <EmbeddedResource Include="simpleIntersectionTest.json" />
     <EmbeddedResource Include="simpleDifferenceTest.json" />
     <EmbeddedResource Include="simpleXorTest.json" />
+    <EmbeddedResource Include="offsetSquare10Test.json" />
+    <EmbeddedResource Include="offsetSquareMinus10Test.json" />
+    <EmbeddedResource Include="offsetMiter10Test.json" />
+    <EmbeddedResource Include="offsetMiterMinus10Test.json" />
+    <EmbeddedResource Include="offsetRound10Test.json" />
+    <EmbeddedResource Include="offsetRoundMinus10Test.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
