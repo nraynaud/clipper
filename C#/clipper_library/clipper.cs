@@ -4591,7 +4591,7 @@ namespace ClipperLib
       }
       else
       {
-        IntRect r = Clipper.GetBounds(m_destPolys);
+        IntRect r = ClipperBase.GetBounds(m_destPolys);
         Path outer = new Path(4);
 
         outer.Add(new IntPoint(r.left - 10, r.bottom + 10));
@@ -4623,7 +4623,7 @@ namespace ClipperLib
       }
       else
       {
-        IntRect r = Clipper.GetBounds(m_destPolys);
+        IntRect r = ClipperBase.GetBounds(m_destPolys);
         Path outer = new Path(4);
 
         outer.Add(new IntPoint(r.left - 10, r.bottom + 10));
